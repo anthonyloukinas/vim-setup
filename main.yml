@@ -36,18 +36,21 @@
       src: vimrc
       dest: ~/.vimrc
 
-  # Install the plugins fails/errors if the color scheme is not found. Comment out for now
-  - name: Comment out color scheme
+  # Need to remove the colorscheme, so vimplug doesnt fail
+  - name: Remove colorscheme
     lineinfile:
       path: ~/.vimrc
       regexp: '^colorscheme spacegray$'
-      line: '" colorschme spacegray'
+      state: absent
 
   - name: Install VimPlug plugins
     shell: vim +PlugInstall +qall > /dev/null
 
-  - name: Uncomment out color scheme
+  # We are good to add the color scheme back now that it's been cloned.
+  - name: Add color scheme back
     lineinfile:
       path: ~/.vimrc
-      regexp: '^" colorscheme spacegray$'
+      regexp: '^" Color Scheme$'
+      insertafter: '^" Color Scheme$'
       line: "colorscheme spacegray"
+      state: present
