@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  
+  tasks:
+  # VimPlug Tasks
+  - name: Check if VimPlug is installed
+    stat:
+      path: ~/.vim/autoload/plug.vim
+    register: vimPlugInstalled
+
+  - name: Ensure directories exist for VimPlug
+    file:
+      path: ~/.vim/autoload
+      state: directory
+
+  - name: Install VimPlug
+    get_url:
+      url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      dest: ~/.vim/autoload/plug.vim
+    when: vimPlugInstalled.stat.exists == False
+
+  # .vimrc Tasks
+  - name: Check if .vimrc exists
+    stat:
+      path: ~/.vimrc
+    register: vimrcExists
+
+  - name: Backup existing .vimrc
+    copy:
+      src: ~/.vimrc
+      dest: ~/.vimrc-ansible-backup
+    when: vimrcExists.stat.exists == True
+
+  - name: Copy .vimrc
+    copy:
+      src: vimrc
+      dest: ~/.vimrc
+
+  - name: Install VimPlug plugins
+    shell: vim +PlugInstall +qall > /dev/null

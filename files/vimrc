@@ -1,0 +1,64 @@
+""""""""""""""""""""""""""""""""""""""""
+" Anthony Loukinas VimRC Configuration "
+""""""""""""""""""""""""""""""""""""""""
+
+" Init vimplug
+call plug#begin('~/.vim/plugged')
+
+" Utility
+Plug 'scrooloose/nerdtree'
+Plug 'spf13/vim-autoclose'
+
+" Theme
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'ajh17/Spacegray.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+
+" End vimplug
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""
+" Configuration Section
+"""""""""""""""""""""""""""""""""""""
+syntax on
+set number
+
+" Set Proper Tabs
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
+
+" Always display the status line
+set laststatus=2
+
+" Theme and Styling
+set t_Co=256
+set background=dark
+
+filetype plugin indent on
+
+" Vim-Airline Configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='hybrid'
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+
+" AutoComplete
+let g:deoplete#enable_at_startup = 1
+
+" AutoBracket Close
+let g:autoclose_vim_commentmode = 1
+
+" Color Scheme Settings
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme spacegray
+
+" Indent-Guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
