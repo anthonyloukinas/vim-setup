@@ -39,6 +39,7 @@
   # Install the plugins fails/errors if the color scheme is not found. Comment out for now
   - name: Comment out color scheme
     lineinfile:
+      path: ~/.vimrc
       regexp: '^colorscheme spacegray$'
       line: '" colorschme spacegray'
 
@@ -47,5 +48,6 @@
 
   - name: Uncomment out color scheme
     lineinfile:
+      path: ~/.vimrc
       regexp: '^" colorscheme spacegray$'
       line: "colorscheme spacegray"
