@@ -36,5 +36,16 @@
       src: vimrc
       dest: ~/.vimrc
 
+  # Install the plugins fails/errors if the color scheme is not found. Comment out for now
+  - name: Comment out color scheme
+    lineinfile:
+      regexp: '^colorscheme spacegray$'
+      line: '" colorschme spacegray'
+
   - name: Install VimPlug plugins
     shell: vim +PlugInstall +qall > /dev/null
+
+  - name: Uncomment out color scheme
+    lineinfile:
+      regexp: '^" colorscheme spacegray$'
+      line: "colorscheme spacegray"
